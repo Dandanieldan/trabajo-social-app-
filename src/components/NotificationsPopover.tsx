@@ -46,14 +46,18 @@ export default function NotificationsPopover() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-72 rounded-xl bg-[var(--sidebar-bg)] border border-border backdrop-blur-3xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] z-50 overflow-hidden"
+            className="absolute right-0 mt-2 w-72 rounded-2xl bg-white/5 dark:bg-black/20 border border-black/10 dark:border-white/10 backdrop-blur-3xl shadow-[0_16px_40px_rgba(0,0,0,0.2)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.6)] z-50 overflow-hidden"
           >
-            <div className="p-3 border-b border-border bg-black/10">
+            {/* Efecto de textura/grano sutil y reflejo de cristal */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/[0.05] to-transparent" />
+            
+            <div className="p-3 border-b border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-black/20 relative z-10">
               <h3 className="text-xs font-semibold text-foreground">Notificaciones</h3>
             </div>
-            <div className="max-h-80 overflow-y-auto divide-y divide-border">
+            <div className="max-h-80 overflow-y-auto divide-y divide-black/5 dark:divide-white/5 relative z-10">
               {notifications.map((notif) => (
-                <div key={notif.id} className={`p-3 hover:bg-white/[0.04] transition-colors cursor-pointer ${notif.unread ? "bg-white/[0.02]" : ""}`}>
+                <div key={notif.id} className={`p-3 hover:bg-black/5 dark:hover:bg-white/[0.04] transition-colors cursor-pointer ${notif.unread ? "bg-black/[0.03] dark:bg-white/[0.02]" : ""}`}>
                   <div className="flex justify-between items-start">
                     <p className={`text-[11px] ${notif.unread ? "text-foreground font-medium" : "text-muted-foreground"}`}>
                       {notif.title}
@@ -66,7 +70,7 @@ export default function NotificationsPopover() {
                 </div>
               ))}
             </div>
-            <div className="p-2 text-center border-t border-border bg-black/10">
+            <div className="p-2 text-center border-t border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-black/20 relative z-10">
               <button className="text-[10px] text-primary hover:text-primary/80 font-medium transition-colors">
                 Marcar todas como leídas
               </button>
