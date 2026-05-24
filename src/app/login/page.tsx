@@ -26,7 +26,8 @@ export default function LoginPage() {
     });
 
     if (authError) {
-      setError("Credenciales incorrectas o error de conexión.");
+      console.error("Supabase Auth Error:", authError);
+      setError(authError.message || "Credenciales incorrectas o error de conexión.");
       setIsLoading(false);
     } else {
       setIsSuccess(true);
