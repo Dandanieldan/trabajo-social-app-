@@ -83,7 +83,7 @@ export default function Sidebar() {
       </div>
 
       {/* Mobile Bottom Navigation (visible only on mobile) */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[var(--header-bg)] backdrop-blur-2xl border-t border-border z-50 flex items-center justify-around px-2 pb-safe">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[var(--header-bg)] backdrop-blur-2xl border-t border-border z-50 flex items-center justify-around px-1 pb-safe shadow-[0_-4px_24px_rgba(0,0,0,0.1)]">
         {routes.map((route) => {
           const isActive = pathname === route.href || (pathname.startsWith(`${route.href}/`) && route.href !== "/");
           return (
@@ -91,24 +91,24 @@ export default function Sidebar() {
               key={route.href}
               href={route.href}
               className={cn(
-                "flex flex-col items-center justify-center w-14 h-full gap-1 transition-colors relative",
+                "flex flex-col items-center justify-center w-full max-w-[56px] h-full gap-0.5 transition-colors relative",
                 isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
               )}
             >
               {isActive && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-primary rounded-b-full shadow-[0_0_8px_var(--tw-shadow-color)] shadow-primary" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-primary rounded-b-full shadow-[0_0_8px_var(--tw-shadow-color)] shadow-primary" />
               )}
-              <route.icon strokeWidth={isActive ? 2.5 : 2} className="h-5 w-5" />
-              <span className="text-[9px] font-medium tracking-tight truncate w-full text-center">{route.label}</span>
+              <route.icon strokeWidth={isActive ? 2.5 : 2} className="h-[18px] w-[18px] mt-1" />
+              <span className="text-[8.5px] font-medium tracking-tight truncate w-full text-center leading-tight">{route.label}</span>
             </Link>
           );
         })}
         <Link
           href="/configuracion"
-          className="flex flex-col items-center justify-center w-14 h-full gap-1 text-muted-foreground hover:text-foreground transition-colors"
+          className="flex flex-col items-center justify-center w-full max-w-[56px] h-full gap-0.5 text-muted-foreground hover:text-foreground transition-colors"
         >
-          <Settings strokeWidth={2} className="h-5 w-5" />
-          <span className="text-[9px] font-medium tracking-tight truncate w-full text-center">Ajustes</span>
+          <Settings strokeWidth={2} className="h-[18px] w-[18px] mt-1" />
+          <span className="text-[8.5px] font-medium tracking-tight truncate w-full text-center leading-tight">Ajustes</span>
         </Link>
       </div>
     </>

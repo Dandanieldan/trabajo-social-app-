@@ -1,11 +1,11 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { 
-  Users, 
-  FileText, 
-  AlertTriangle, 
-  Clock, 
+import {
+  Users,
+  FileText,
+  AlertTriangle,
+  Clock,
   ArrowRight,
   TrendingUp,
   TrendingDown
@@ -28,14 +28,14 @@ const recentActivity = [
 
 const containerVariants: Variants = {
   hidden: { opacity: 0, filter: "blur(8px)" },
-  visible: { 
-    opacity: 1, 
-    filter: "blur(0px)", 
-    transition: { 
+  visible: {
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: {
       staggerChildren: 0.04,
       duration: 0.5,
       ease: "easeOut"
-    } 
+    }
   }
 };
 
@@ -46,10 +46,10 @@ const itemVariants: Variants = {
 
 export default function Dashboard() {
   return (
-    <motion.div 
-      variants={containerVariants} 
-      initial="hidden" 
-      animate="visible" 
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
       className="max-w-6xl mx-auto space-y-6"
     >
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
@@ -58,19 +58,19 @@ export default function Dashboard() {
             Hola, Rebeca
           </h1>
           <p className="text-muted-foreground mt-0.5 text-xs">
-            Aquí está el resumen de tu departamento al día de hoy.
+            Aquí está el resumen de tu departamento al dia de hoy.
           </p>
         </div>
         <div>
           <Link href="/justificantes/nuevo">
-            <button className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md text-xs font-medium transition-colors shadow-sm cursor-pointer">
+            <button className="bg-primary text-primary-foreground hover:bg-primary/90 px-3 py-1.5 md:px-4 md:py-2 rounded-md text-[10px] md:text-xs font-medium transition-colors shadow-sm cursor-pointer">
               Crear Justificante
             </button>
           </Link>
         </div>
       </div>
 
-      <motion.div 
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
