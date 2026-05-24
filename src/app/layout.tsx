@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import { Search, Bell } from "lucide-react";
 import MouseGlow from "@/components/MouseGlow";
 import ThemeToggle from "@/components/ThemeToggle";
+import { createClient } from "@/utils/supabase/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,14 +14,40 @@ export const metadata: Metadata = {
   description: "Plataforma asistente para Trabajo Social",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  // If the user is NOT logged in, render a completely clean viewport layout without Sidebar or Header.
+  // This allows the Login modal to center globally and prevents unauthenticated layout leaks.
+  if (!user) {
+    return (
+      <html lang="es" className="h-full antialiased dark">
+        <body className={`${inter.className} min-h-full flex flex-col bg-background text-foreground relative overflow-hidden transition-colors duration-400`}>
+          <MouseGlow />
+          {/* Global Texture Overlay */}
+          <div className="absolute inset-0 z-[-2] pointer-events-none">
+            <div 
+              className="absolute inset-0 opacity-[0.035] mix-blend-overlay"
+              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+            />
+          </div>
+          <main className="flex-1 w-full h-full relative z-10 flex items-center justify-center">
+            {children}
+          </main>
+        </body>
+      </html>
+    );
+  }
+
+  // Authenticated Layout (with Sidebar, Topbar Header, and Main grid)
   return (
     <html lang="es" className="h-full antialiased dark">
-      <body className={`${inter.className} min-h-full flex flex-col bg-background text-foreground relative overflow-hidden`}>
+      <body className={`${inter.className} min-h-full flex flex-col bg-background text-foreground relative overflow-hidden transition-colors duration-400`}>
         
         {/* Global Pure Black & Neutral Glow Background to make Glassmorphism pop */}
         <MouseGlow />
