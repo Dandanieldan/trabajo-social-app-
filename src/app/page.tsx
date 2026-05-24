@@ -52,10 +52,10 @@ export default function Dashboard() {
       animate="visible" 
       className="max-w-6xl mx-auto space-y-6"
     >
-      <div className="flex justify-between items-end">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
         <div>
           <h1 className="text-xl font-semibold tracking-tight text-foreground">
-            Hola, Juana
+            Hola, Rebeca
           </h1>
           <p className="text-muted-foreground mt-0.5 text-xs">
             Aquí está el resumen de tu departamento al día de hoy.

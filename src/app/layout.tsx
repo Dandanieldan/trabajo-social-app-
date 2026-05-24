@@ -69,10 +69,10 @@ export default async function RootLayout({
           
           <div className="flex-1 flex flex-col overflow-hidden relative z-0">
             {/* Topbar: Tempered Glass */}
-            <header className="h-14 flex items-center justify-between px-6 border-b border-border bg-[var(--header-bg)] backdrop-blur-xl z-10 sticky top-0 transition-colors duration-300">
-              <div className="flex items-center group">
-                <div className="flex items-center bg-white/[0.03] dark:bg-white/[0.03] bg-black/[0.02] px-3 py-1.5 border border-border rounded-md group-focus-within:border-foreground/20 transition-all w-80 relative shadow-inner">
-                  <Search className="h-3.5 w-3.5 text-muted-foreground mr-2.5" />
+            <header className="h-14 flex items-center justify-between px-4 md:px-6 border-b border-border bg-[var(--header-bg)] backdrop-blur-xl z-10 sticky top-0 transition-colors duration-300 gap-2 md:gap-4">
+              <div className="flex items-center group flex-1 md:flex-none">
+                <div className="flex items-center bg-white/[0.03] dark:bg-white/[0.03] bg-black/[0.02] px-3 py-1.5 border border-border rounded-md group-focus-within:border-foreground/20 transition-all w-full md:w-80 relative shadow-inner">
+                  <Search className="h-3.5 w-3.5 text-muted-foreground shrink-0 mr-2.5" />
                   <input 
                     type="text" 
                     placeholder="Buscar estudiante, folio..." 
@@ -90,7 +90,8 @@ export default async function RootLayout({
             </header>
             
             {/* Main Content Area */}
-            <main className="flex-1 overflow-y-auto p-6 md:p-8 relative">
+            {/* Added pb-20 md:pb-8 so content isn't covered by mobile bottom nav */}
+            <main className="flex-1 overflow-y-auto p-4 pb-24 md:p-8 relative">
               {children}
             </main>
           </div>

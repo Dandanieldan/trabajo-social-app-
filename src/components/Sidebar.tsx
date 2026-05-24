@@ -26,8 +26,9 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    // Narrower width w-60 (240px) or w-56 (224px), more blur, theme-responsive bg
-    <div className="space-y-4 py-5 flex flex-col h-full w-56 bg-[var(--sidebar-bg)] backdrop-blur-2xl border-r border-border text-xs font-medium z-20 transition-all duration-300">
+    <>
+      {/* Desktop Sidebar (hidden on mobile) */}
+      <div className="hidden md:flex space-y-4 py-5 flex-col h-full w-56 bg-[var(--sidebar-bg)] backdrop-blur-2xl border-r border-border text-xs font-medium z-20 transition-all duration-300">
       <div className="px-4 flex-1">
         <Link href="/" className="flex items-center mb-8 group pl-2">
           <div className="h-6 w-6 bg-white/10 border border-white/10 rounded-md flex items-center justify-center mr-2.5 text-white font-bold shadow-inner transition-colors group-hover:bg-white group-hover:text-black text-[10px]">
@@ -65,10 +66,10 @@ export default function Sidebar() {
         <div className="pt-3 border-t border-border flex justify-between items-center px-1">
           <div className="flex items-center gap-2.5">
             <div className="h-7 w-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-foreground font-semibold text-[10px] shadow-inner">
-              JD
+              RF
             </div>
             <div className="flex flex-col">
-              <span className="text-xs text-foreground font-medium line-clamp-1">Juana Díaz</span>
+              <span className="text-xs text-foreground font-medium line-clamp-1">Rebeca Favela Corral</span>
               <span className="text-[10px] text-muted-foreground line-clamp-1">Trabajadora Social</span>
             </div>
           </div>
@@ -79,6 +80,37 @@ export default function Sidebar() {
           </form>
         </div>
       </div>
-    </div>
+      </div>
+
+      {/* Mobile Bottom Navigation (visible only on mobile) */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[var(--header-bg)] backdrop-blur-2xl border-t border-border z-50 flex items-center justify-around px-2 pb-safe">
+        {routes.map((route) => {
+          const isActive = pathname === route.href || (pathname.startsWith(`${route.href}/`) && route.href !== "/");
+          return (
+            <Link
+              key={route.href}
+              href={route.href}
+              className={cn(
+                "flex flex-col items-center justify-center w-14 h-full gap-1 transition-colors relative",
+                isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {isActive && (
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-primary rounded-b-full shadow-[0_0_8px_var(--tw-shadow-color)] shadow-primary" />
+              )}
+              <route.icon strokeWidth={isActive ? 2.5 : 2} className="h-5 w-5" />
+              <span className="text-[9px] font-medium tracking-tight truncate w-full text-center">{route.label}</span>
+            </Link>
+          );
+        })}
+        <Link
+          href="/configuracion"
+          className="flex flex-col items-center justify-center w-14 h-full gap-1 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Settings strokeWidth={2} className="h-5 w-5" />
+          <span className="text-[9px] font-medium tracking-tight truncate w-full text-center">Ajustes</span>
+        </Link>
+      </div>
+    </>
   );
 }
