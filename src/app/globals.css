@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Strictly Neutral Black/Gray Theme */
+  /* Strictly Neutral Black/Gray Theme (Dark Mode) */
   --background: #000000; 
   --foreground: #e5e5e5; /* Neutral-200 */
   
@@ -23,6 +23,39 @@
   --accent-amber: #f59e0b;
   --accent-red: #ef4444;
   --accent-emerald: #10b981;
+
+  /* Mouse Glow Variables */
+  --glow-color-primary: rgba(255, 255, 255, 0.06);
+  --glow-color-secondary: rgba(255, 255, 255, 0.01);
+
+  --sidebar-bg: rgba(0, 0, 0, 0.3);
+  --header-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Light Mode Override (when .dark class is NOT present) */
+:root:not(.dark) {
+  --background: #f4f4f5; /* Neutral-100 */
+  --foreground: #171717; /* Neutral-900 */
+  
+  /* Milky frosted white glass */
+  --card: rgba(255, 255, 255, 0.6);       
+  --card-foreground: #171717;
+  
+  /* Subtle dark border */
+  --border: rgba(0, 0, 0, 0.06);     
+  
+  --primary: #000000;    
+  --primary-foreground: #ffffff;
+  
+  --muted: rgba(0, 0, 0, 0.02);
+  --muted-foreground: #737373; /* Neutral-500 */
+
+  /* Mouse Glow in Light Mode is a soft bright white halo to wash over the gray */
+  --glow-color-primary: rgba(255, 255, 255, 0.7);
+  --glow-color-secondary: rgba(255, 255, 255, 0.1);
+
+  --sidebar-bg: rgba(255, 255, 255, 0.4);
+  --header-bg: rgba(255, 255, 255, 0.4);
 }
 
 @theme inline {
@@ -44,6 +77,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* Smooth transition when switching themes */
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* Elegant minimalist scrollbar */
@@ -58,6 +93,12 @@ body {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
+:root:not(.dark) ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+}
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+:root:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
 }

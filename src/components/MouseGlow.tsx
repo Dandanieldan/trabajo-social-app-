@@ -35,7 +35,7 @@ export default function MouseGlow() {
       ref={glowRef}
       className="pointer-events-none fixed top-0 left-0 w-[600px] h-[600px] rounded-full z-[-1] transition-opacity duration-700"
       style={{
-        background: "radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 35%, rgba(0,0,0,0) 70%)",
+        background: "radial-gradient(circle, var(--glow-color-primary) 0%, var(--glow-color-secondary) 35%, rgba(0,0,0,0) 70%)",
         opacity: isVisible ? 1 : 0,
         transform: "translate(-50%, -50%)", // Empieza oculto en la esquina si no hay mouse
         willChange: "transform",

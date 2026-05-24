@@ -4,6 +4,7 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import { Search, Bell } from "lucide-react";
 import MouseGlow from "@/components/MouseGlow";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,9 +42,9 @@ export default function RootLayout({
           
           <div className="flex-1 flex flex-col overflow-hidden relative z-0">
             {/* Topbar: Tempered Glass */}
-            <header className="h-14 flex items-center justify-between px-6 border-b border-border bg-black/30 backdrop-blur-2xl z-10 sticky top-0">
+            <header className="h-14 flex items-center justify-between px-6 border-b border-border bg-[var(--header-bg)] backdrop-blur-xl z-10 sticky top-0 transition-colors duration-300">
               <div className="flex items-center group">
-                <div className="flex items-center bg-white/[0.03] px-3 py-1.5 border border-border rounded-md group-focus-within:border-white/20 transition-all w-80 relative shadow-inner">
+                <div className="flex items-center bg-white/[0.03] dark:bg-white/[0.03] bg-black/[0.02] px-3 py-1.5 border border-border rounded-md group-focus-within:border-foreground/20 transition-all w-80 relative shadow-inner">
                   <Search className="h-3.5 w-3.5 text-muted-foreground mr-2.5" />
                   <input 
                     type="text" 
@@ -52,10 +53,11 @@ export default function RootLayout({
                   />
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <button className="relative text-muted-foreground hover:text-foreground transition-colors p-1.5 hover:bg-white/5 rounded-full">
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
+                <button className="relative text-muted-foreground hover:text-foreground transition-colors p-1.5 hover:bg-white/5 rounded-full cursor-pointer">
                   <Bell className="h-4 w-4" />
-                  <span className="absolute top-1 right-1 h-1.5 w-1.5 bg-neutral-300 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]"></span>
+                  <span className="absolute top-1 right-1 h-1.5 w-1.5 bg-red-500 rounded-full dark:shadow-[0_0_8px_rgba(255,255,255,0.8)] shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
                 </button>
               </div>
             </header>

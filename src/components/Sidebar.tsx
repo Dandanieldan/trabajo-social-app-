@@ -26,8 +26,8 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    // Narrower width w-60 (240px) or w-56 (224px), more blur, blacker transparent bg
-    <div className="space-y-4 py-5 flex flex-col h-full w-56 bg-black/30 backdrop-blur-2xl border-r border-border text-xs font-medium z-20">
+    // Narrower width w-60 (240px) or w-56 (224px), more blur, theme-responsive bg
+    <div className="space-y-4 py-5 flex flex-col h-full w-56 bg-[var(--sidebar-bg)] backdrop-blur-2xl border-r border-border text-xs font-medium z-20 transition-all duration-300">
       <div className="px-4 flex-1">
         <Link href="/" className="flex items-center mb-8 group pl-2">
           <div className="h-6 w-6 bg-white/10 border border-white/10 rounded-md flex items-center justify-center mr-2.5 text-white font-bold shadow-inner transition-colors group-hover:bg-white group-hover:text-black text-[10px]">
@@ -44,7 +44,7 @@ export default function Sidebar() {
                 href={route.href}
                 className={cn(
                   "group flex items-center px-3 py-2 w-full justify-start cursor-pointer transition-all relative rounded-lg",
-                  isActive ? "text-primary bg-white/[0.06] border border-white/5 shadow-sm" : "text-muted-foreground hover:text-foreground hover:bg-white/[0.03] border border-transparent"
+                  isActive ? "text-primary bg-white/[0.06] dark:bg-white/[0.06] bg-black/[0.03] border border-white/5 dark:border-white/5 border-black/5 shadow-sm" : "text-muted-foreground hover:text-foreground hover:bg-white/[0.03] dark:hover:bg-white/[0.03] hover:bg-black/[0.02] border border-transparent"
                 )}
               >
                 <route.icon strokeWidth={2.5} className={cn("h-3.5 w-3.5 mr-2.5 transition-colors", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
