@@ -12,7 +12,6 @@ import {
   Settings,
   LogOut
 } from "lucide-react";
-import { motion } from "framer-motion";
 import { signout } from "@/app/login/actions";
 
 const routes = [
@@ -27,15 +26,16 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="space-y-4 py-6 flex flex-col h-full bg-background border-r border-border w-64 text-sm font-medium">
-      <div className="px-6 flex-1">
-        <Link href="/" className="flex items-center mb-10 group">
-          <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center mr-3 text-primary-foreground font-bold">
+    // Narrower width w-60 (240px) or w-56 (224px), more blur, blacker transparent bg
+    <div className="space-y-4 py-5 flex flex-col h-full w-56 bg-black/30 backdrop-blur-2xl border-r border-border text-xs font-medium z-20">
+      <div className="px-4 flex-1">
+        <Link href="/" className="flex items-center mb-8 group pl-2">
+          <div className="h-6 w-6 bg-white/10 border border-white/10 rounded-md flex items-center justify-center mr-2.5 text-white font-bold shadow-inner transition-colors group-hover:bg-white group-hover:text-black text-[10px]">
             TS
           </div>
-          <h1 className="text-base font-semibold text-foreground tracking-tight">Trabajo Social</h1>
+          <h1 className="text-sm font-semibold text-foreground tracking-tight">Trabajo Social</h1>
         </Link>
-        <div className="space-y-1.5">
+        <div className="space-y-1">
           {routes.map((route) => {
             const isActive = pathname === route.href || pathname.startsWith(`${route.href}/`) && route.href !== "/";
             return (
@@ -43,38 +43,38 @@ export default function Sidebar() {
                 key={route.href}
                 href={route.href}
                 className={cn(
-                  "group flex items-center px-3 py-2.5 w-full justify-start cursor-pointer transition-all relative rounded-lg",
-                  isActive ? "text-primary bg-muted/50" : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                  "group flex items-center px-3 py-2 w-full justify-start cursor-pointer transition-all relative rounded-lg",
+                  isActive ? "text-primary bg-white/[0.06] border border-white/5 shadow-sm" : "text-muted-foreground hover:text-foreground hover:bg-white/[0.03] border border-transparent"
                 )}
               >
-                <route.icon className={cn("h-4 w-4 mr-3 transition-colors", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
+                <route.icon strokeWidth={2.5} className={cn("h-3.5 w-3.5 mr-2.5 transition-colors", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
                 {route.label}
               </Link>
             );
           })}
         </div>
       </div>
-      <div className="px-6 pb-4 space-y-4">
+      <div className="px-4 pb-2 space-y-3">
         <Link
           href="/configuracion"
-          className="group flex items-center px-3 py-2.5 w-full justify-start cursor-pointer transition-colors text-muted-foreground hover:text-foreground hover:bg-muted/30 rounded-lg"
+          className="group flex items-center px-3 py-2 w-full justify-start cursor-pointer transition-colors text-muted-foreground hover:text-foreground hover:bg-white/[0.03] rounded-lg border border-transparent"
         >
-          <Settings className="h-4 w-4 mr-3" />
+          <Settings strokeWidth={2.5} className="h-3.5 w-3.5 mr-2.5" />
           Configuración
         </Link>
-        <div className="pt-4 border-t border-border flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-full bg-muted flex items-center justify-center text-foreground font-semibold text-sm">
+        <div className="pt-3 border-t border-border flex justify-between items-center px-1">
+          <div className="flex items-center gap-2.5">
+            <div className="h-7 w-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-foreground font-semibold text-[10px] shadow-inner">
               JD
             </div>
             <div className="flex flex-col">
-              <span className="text-sm text-foreground font-medium line-clamp-1">Juana Díaz</span>
-              <span className="text-xs text-muted-foreground line-clamp-1">Trabajadora Social</span>
+              <span className="text-xs text-foreground font-medium line-clamp-1">Juana Díaz</span>
+              <span className="text-[10px] text-muted-foreground line-clamp-1">Trabajadora Social</span>
             </div>
           </div>
           <form action={signout}>
-            <button title="Cerrar sesión" className="p-2 text-muted-foreground hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors">
-              <LogOut className="h-4 w-4" />
+            <button title="Cerrar sesión" className="p-1.5 text-muted-foreground hover:text-red-400 hover:bg-red-400/10 rounded-md transition-colors">
+              <LogOut className="h-3.5 w-3.5" />
             </button>
           </form>
         </div>
