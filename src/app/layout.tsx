@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import { Search, Bell } from "lucide-react";
+import MouseGlow from "@/components/MouseGlow";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,14 +22,15 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-full flex flex-col bg-background text-foreground relative overflow-hidden`}>
         
         {/* Global Pure Black & Neutral Glow Background to make Glassmorphism pop */}
-        <div className="absolute inset-0 z-[-1] pointer-events-none">
+        <MouseGlow />
+        <div className="absolute inset-0 z-[-2] pointer-events-none">
           {/* Subtle neutral glow at the top-left to contrast the sidebar glass */}
-          <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,rgba(0,0,0,0)_70%)] rounded-full" />
+          <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] bg-[radial-gradient(circle,rgba(255,255,255,0.06)_0%,rgba(0,0,0,0)_70%)] rounded-full" />
           {/* Subtle neutral glow at the bottom-right */}
-          <div className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,rgba(0,0,0,0)_70%)] rounded-full" />
+          <div className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-[radial-gradient(circle,rgba(255,255,255,0.04)_0%,rgba(0,0,0,0)_70%)] rounded-full" />
           
           <div 
-            className="absolute inset-0 opacity-[0.04] mix-blend-overlay"
+            className="absolute inset-0 opacity-[0.035] mix-blend-overlay"
             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
           />
         </div>
