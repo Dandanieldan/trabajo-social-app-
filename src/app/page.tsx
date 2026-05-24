@@ -27,8 +27,16 @@ const recentActivity = [
 ];
 
 const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.04 } }
+  hidden: { opacity: 0, filter: "blur(8px)" },
+  visible: { 
+    opacity: 1, 
+    filter: "blur(0px)", 
+    transition: { 
+      staggerChildren: 0.04,
+      duration: 0.5,
+      ease: "easeOut"
+    } 
+  }
 };
 
 const itemVariants: Variants = {
@@ -38,23 +46,28 @@ const itemVariants: Variants = {
 
 export default function Dashboard() {
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
+    <motion.div 
+      variants={containerVariants} 
+      initial="hidden" 
+      animate="visible" 
+      className="max-w-6xl mx-auto space-y-6"
+    >
       <div className="flex justify-between items-end">
         <div>
-          <motion.h1 variants={itemVariants} initial="hidden" animate="visible" className="text-xl font-semibold tracking-tight text-foreground">
+          <h1 className="text-xl font-semibold tracking-tight text-foreground">
             Hola, Juana
-          </motion.h1>
-          <motion.p variants={itemVariants} initial="hidden" animate="visible" className="text-muted-foreground mt-0.5 text-xs">
+          </h1>
+          <p className="text-muted-foreground mt-0.5 text-xs">
             Aquí está el resumen de tu departamento al día de hoy.
-          </motion.p>
+          </p>
         </div>
-        <motion.div variants={itemVariants} initial="hidden" animate="visible">
+        <div>
           <Link href="/justificantes/nuevo">
-            <button className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md text-xs font-medium transition-colors shadow-sm">
+            <button className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md text-xs font-medium transition-colors shadow-sm cursor-pointer">
               Crear Justificante
             </button>
           </Link>
-        </motion.div>
+        </div>
       </div>
 
       <motion.div 
@@ -134,6 +147,6 @@ export default function Dashboard() {
           </div>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
